@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $("#js-vote").on("submit", function() {
+  $("article").on("submit", "#js-vote", function() {
     event.preventDefault();
     $form = $(this);
     var method = $form.attr("method");
@@ -9,14 +9,15 @@ $(document).ready(function() {
       method: method,
       url: url
     }).done(function(response) {
-      $("#js-post-details").children(".points").replaceWith(response);
-      $form.children("#js-upvote-button").css("color", "red")
+      $form.children("button").css("color", "red");
+      var post = $form.siblings("p");
+      post.children(".points").replaceWith(response + " points")
     })
-  })
+
   // $(".upvote-button").on("click", function() {
   //   event.preventDefault();
   //   var $button = $(this);
 
   //   $button.css("color", "red");
-  // })
+  })
 });

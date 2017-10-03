@@ -17,7 +17,7 @@
         <button id="js-upvote-button" type="submit" name="submit_param" value="submit_value" class="fa fa-sort-desc vote-button upvote-button"></button>
       </form>
       <h2><a href='/posts/<%= post.id %>'><%= post.title %></a></h2>
-      <p id="js-post-details">
+      <p>
         <span class='points'><%= erb :"/votes/_vote_points", locals: {post: post} %></span>
         <span class='username'><%= post.username %></span>
         <span class='timestamp'><%= post.time_since_creation %></span>
