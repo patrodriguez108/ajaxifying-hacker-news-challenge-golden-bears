@@ -97,6 +97,16 @@ article p a.delete:before {
 
 }
 
+form input#delete-button {
+    background: none;
+    border: none;
+    color: #8C8C8C;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 7pt;
+    display: inline;
+}
+
 form#posts input[type='text'] {
   width: 200px;
   margin-left: 20px;

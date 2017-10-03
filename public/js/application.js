@@ -12,12 +12,20 @@ $(document).ready(function() {
       $form.children("button").css("color", "red");
       var post = $form.siblings("p");
       post.children(".points").replaceWith(response + " points")
+    });
+  });
+
+  $("article").on("submit", "#js-delete", function() {
+    event.preventDefault();
+    $form = $(this);
+    var method = $form.children('input[type="hidden"]').attr("value")
+    var url = $form.attr("action")
+
+    $.ajax({
+      method: method,
+      url: url
+    }).done(function(response) {
+      $(".post-container").replaceWith(response)
     })
-
-  // $(".upvote-button").on("click", function() {
-  //   event.preventDefault();
-  //   var $button = $(this);
-
-  //   $button.css("color", "red");
   })
 });

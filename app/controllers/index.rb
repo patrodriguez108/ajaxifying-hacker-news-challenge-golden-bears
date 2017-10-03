@@ -11,6 +11,7 @@ post '/posts/:id/vote' do
   post = Post.find(params[:id])
   post.votes.create(value: 1)
   if request.xhr?
+    # post.votes.json
     erb :"/votes/_vote_points", locals: {post: post}, layout: false
   else
     redirect "/posts"
@@ -18,7 +19,14 @@ post '/posts/:id/vote' do
 end
 
 delete '/posts/:id' do
-  # write logic for deleting posts here.
+  @posts = Post.all
+  post = Post.find(params[:id])
+  post.destroy
+  if request.xhr?
+    erb :'/posts/_post_list', locals: {posts: @post}, layout: false
+  else
+    redirect "/posts"
+  end
 end
 
 post '/posts' do
