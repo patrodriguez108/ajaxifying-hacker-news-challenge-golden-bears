@@ -9,10 +9,11 @@ end
 
 post '/posts/:id/vote' do
   post = Post.find(params[:id])
-  post.votes.create(value: 1)
+  vote = post.votes.create(value: 1)
   if request.xhr?
-    # post.votes.json
-    erb :"/votes/_vote_points", locals: {post: post}, layout: false
+    content_type :json
+    {points: post.points}.to_json
+    # erb :"/votes/_vote_points", locals: {post: post}, layout: false
   else
     redirect "/posts"
   end

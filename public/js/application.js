@@ -10,12 +10,13 @@ $(document).ready(function() {
       url: url
     }).done(function(response) {
       $form.children("button").css("color", "red");
-      var post = $form.siblings("p");
-      post.children(".points").replaceWith(response + " points")
+      var post = $form.siblings("div");
+      console.log(post)
+      post.children(".points").replaceWith(response.points + " points")
     });
   });
 
-  $("article").on("submit", "#js-delete", function() {
+  $("article").on("submit", ".delete", function() {
     event.preventDefault();
     $form = $(this);
     var method = $form.children('input[type="hidden"]').attr("value")

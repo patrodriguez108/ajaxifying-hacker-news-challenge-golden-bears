@@ -101,7 +101,7 @@ article div a.delete:before {
   display: inline;
 }
 
-#delete-button {
+.delete-button {
     background: none;
     border: none;
     text-decoration: none;
