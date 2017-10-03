@@ -13,7 +13,9 @@
     <%= erb :'/posts/_post_list', locals: {posts: @post} %>
 </div>
 
-<form id="posts" method="post" action="/posts">
-  <input type="text" name="title" placeholder="title">
-  <input type="submit" value="submit new post">
-</form>
+<div class='js--new-post-form'>
+  <form id="posts" method="post" action="/posts">
+    <input type="text" name="title" placeholder="title">
+    <input type="submit" value="submit new post">
+  </form>
+</div>

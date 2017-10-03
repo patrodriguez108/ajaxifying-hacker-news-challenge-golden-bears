@@ -97,7 +97,7 @@ article p a.delete:before {
 
 }
 
-form input#delete-button {
+#delete-button {
     background: none;
     border: none;
     color: #8C8C8C;

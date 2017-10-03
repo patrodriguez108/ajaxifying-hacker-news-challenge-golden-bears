@@ -30,10 +30,14 @@ delete '/posts/:id' do
 end
 
 post '/posts' do
-  Post.create( title: params[:title],
+  post = Post.create( title: params[:title],
                username: Faker::Internet.user_name,
                comment_count: rand(1000) )
-  redirect '/posts'
+  if request.xhr?
+    erb :'/posts/_post', locals: {post: post}, layout: false
+  else
+    redirect '/posts'
+  end
 end
 
 get '/post/:id' do

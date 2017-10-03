@@ -26,6 +26,23 @@ $(document).ready(function() {
       url: url
     }).done(function(response) {
       $(".post-container").replaceWith(response)
+    });
+  });
+
+  $(".js--new-post-form").on("submit", "#posts", function() {
+    event.preventDefault();
+    $form = $(this)
+    var method = $form.attr("method");
+    var url = $form.attr("action");
+    var data = $form.serialize();
+
+    $.ajax({
+      method: method,
+      url: url,
+      data: data
+    }).done(function(response) {
+      $(".post-container").append(response)
+      $('input[name="title"]').val("")
     })
   })
 });
