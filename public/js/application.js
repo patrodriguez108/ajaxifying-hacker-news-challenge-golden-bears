@@ -11,7 +11,6 @@ $(document).ready(function() {
     }).done(function(response) {
       $form.children("button").css("color", "red");
       var post = $form.siblings("div");
-      console.log(post)
       post.children(".points").replaceWith(response.points + " points")
     });
   });
