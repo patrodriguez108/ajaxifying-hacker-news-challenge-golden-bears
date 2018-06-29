@@ -9,19 +9,36 @@ end
 
 post '/posts/:id/vote' do
   post = Post.find(params[:id])
-  post.votes.create(value: 1)
-  redirect "/posts"
+  vote = post.votes.create(value: 1)
+  if request.xhr?
+    content_type :json
+    {points: post.points}.to_json
+    # erb :"/votes/_vote_points", locals: {post: post}, layout: false
+  else
+    redirect "/posts"
+  end
 end
 
 delete '/posts/:id' do
-  # write logic for deleting posts here.
+  @posts = Post.all
+  post = Post.find(params[:id])
+  post.destroy
+  if request.xhr?
+    erb :'/posts/_post_list', locals: {posts: @post}, layout: false
+  else
+    redirect "/posts"
+  end
 end
 
 post '/posts' do
-  Post.create( title: params[:title],
+  post = Post.create( title: params[:title],
                username: Faker::Internet.user_name,
                comment_count: rand(1000) )
-  redirect '/posts'
+  if request.xhr?
+    erb :'/posts/_post', locals: {post: post}, layout: false
+  else
+    redirect '/posts'
+  end
 end
 
 get '/post/:id' do

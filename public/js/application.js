@@ -1,7 +1,48 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
+  $("article").on("submit", "#js-vote", function() {
+    event.preventDefault();
+    $form = $(this);
+    var method = $form.attr("method");
+    var url = $form.attr("action");
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+    $.ajax({
+      method: method,
+      url: url
+    }).done(function(response) {
+      $form.children("button").css("color", "red");
+      var post = $form.siblings("div");
+      post.children(".points").replaceWith(response.points + " points")
+    });
+  });
+
+  $("article").on("submit", ".delete", function() {
+    event.preventDefault();
+    $form = $(this);
+    var method = $form.children('input[type="hidden"]').attr("value")
+    var url = $form.attr("action")
+
+    $.ajax({
+      method: method,
+      url: url
+    }).done(function(response) {
+      $(".post-container").replaceWith(response)
+    });
+  });
+
+  $(".js--new-post-form").on("submit", "#posts", function() {
+    event.preventDefault();
+    $form = $(this)
+    var method = $form.attr("method");
+    var url = $form.attr("action");
+    var data = $form.serialize();
+
+    $.ajax({
+      method: method,
+      url: url,
+      data: data
+    }).done(function(response) {
+      $(".post-container").append(response)
+      $('input[name="title"]').val("")
+    })
+  })
 });
